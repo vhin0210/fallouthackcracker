@@ -1,13 +1,20 @@
-<h2>Enter Clues</h2>
-<textarea [(ngModel)]="words" (change)="onChange(words)"></textarea>
-<ul class="words">
-  <li *ngFor="let word of wordsArr">
-    {{word.word}} - <input [(ngModel)]="word.likeness" name="likeness" (change)="onLikenessUpdate()" />
-  </li>
-</ul>
-<h2>Possible Answer(s)</h2>
-<ul class="possibleAnswers">
-  <li *ngFor="let word of possibleAnswers">
-    {{word.word}}
-  </li>
-</ul>
+<div class="mdl-grid">
+	<div class="mdl-cell mdl-cell--12-col">
+		<h2>Enter Clues</h2>
+		<div class="mdl-textfield mdl-js-textfield">
+	    	<textarea [(ngModel)]="words" (change)="onChange(words)" class="mdl-textfield__input"></textarea>
+	    	<label class="mdl-textfield__label" for="sample5">Text lines...</label>
+		</div>
+		<ul class="words">
+		  <li *ngFor="let word of wordsArr">
+		    {{word.word}} - <input [(ngModel)]="word.likeness" name="likeness" (change)="onLikenessUpdate()" />
+		  </li>
+		</ul>
+		<h2>Possible Answer(s)</h2>
+		<ul class="possibleAnswers">
+		  <li *ngFor="let word of possibleAnswers">
+		    {{word.word}}
+		  </li>
+		</ul>
+	</div>
+</div>
