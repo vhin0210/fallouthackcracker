@@ -52,8 +52,7 @@ System.config({
     map: {
         '@angular': 'vendor/@angular',
         'rxjs': 'vendor/rxjs',
-        'main': 'main.js',
-        'material': 'vendor/material.min.js'
+        'main': 'main.js'
     },
     packages: cliSystemConfigPackages
 });
