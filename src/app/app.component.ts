@@ -1,6 +1,6 @@
 declare var componentHandler: any;
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef } from '@angular/core';
 // import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 // import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 // import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
@@ -27,6 +27,11 @@ import { FallouthackcrackerComponentComponent } from './fallouthackcracker-compo
 })
 export class AppComponent implements OnInit {
   title = 'Fallout Hack Cracker';
+  elementRef: any;
+
+  constructor(@Inject(ElementRef) elementRef: ElementRef) {
+    this.elementRef = elementRef;
+  }
 
   ngOnInit() {
     componentHandler.upgradeDom();
