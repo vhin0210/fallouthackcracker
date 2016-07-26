@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FallouthackcrackerWord } from './fallouthackcracker-word';
 import { FallouthackcrackerWordChar } from './fallouthackcracker-word-char';
+import { FallouthackcrackerWordCharWords } from './fallouthackcracker-word-char-words';
+import { FallouthackcrackerWordPoints } from './fallouthackcracker-word-points';
 
 // SAMPLE INPUT
 // WORDS:
@@ -31,6 +33,8 @@ export class FallouthackcrackerComponentComponent implements OnInit {
   possibleAnswers: FallouthackcrackerWord[] = [];
   possibleAnswerLetters: FallouthackcrackerWordChar[] = [];
   wordsWithLikeness: FallouthackcrackerWord[] = [];
+  possibleAnswerLettersWords: FallouthackcrackerWordCharWords[] = [];
+  wordsPoints: FallouthackcrackerWordPoints[] = [];
   onChange(words: string) {
     this.wordsArr = [];
     var wordsArr = words.split("\n");
@@ -42,50 +46,53 @@ export class FallouthackcrackerComponentComponent implements OnInit {
       this.wordsArr.push(word);
     }
   };
-  onLikenessUpdate() {
-    this.wordsWithLikeness = [];
-    this.possibleAnswerLetters = [];
-    var highestWordLikeness: FallouthackcrackerWord = {
-      word: 'temp',
-      likeness: 0
-    };
-    for (var key in this.wordsArr) {
-      var word = this.wordsArr[key];
-      if (word.likeness > 0 && word.likeness > highestWordLikeness.likeness) {
-        highestWordLikeness = word;
-        this.wordsWithLikeness.push(word);
-        this.possibleAnswerLetters = [];
-        for (var i = 0, len = word.word.length; i < len; i++) {
-          var tmpLetter: FallouthackcrackerWordChar = {
-            char: word.word[i],
-            position: i + 1
-          };
-          if (this.possibleAnswerLetters.indexOf(tmpLetter) < 0) {
-            this.possibleAnswerLetters.push(tmpLetter);
-          }
-        }
-      }
-    }
-
-    this.possibleAnswers = [];
+  onGetAnswer() {
+    this.possibleAnswerLettersWords = [];
     for (var word of this.wordsArr) {
-      if (word.likeness <= 0 && this.wordsWithLikeness.indexOf(word) < 0) {
-        var thisWordLikeness = 0;
-        for (var letter of this.possibleAnswerLetters) {
-          if (word.word[letter.position - 1] == letter.char) {
-            thisWordLikeness++;
-          }
+      for (var i = 0, len = word.word.length; i < len; i++) {
+        var tmpChar = word.word[i];
+        var tmpIndexKey = i + ':' + tmpChar;
+        var tmpPossibleAnswerLettersWords: FallouthackcrackerWordCharWords = this.possibleAnswerLettersWords[tmpIndexKey];
+        if (typeof tmpPossibleAnswerLettersWords == 'undefined') {
+          tmpPossibleAnswerLettersWords = {
+            char: tmpChar,
+            position: i + 1,
+            words: []
+          };
         }
-        var wordLikenessOk = true;
-        if (!(Number(highestWordLikeness.likeness) <= thisWordLikeness)) {
-          wordLikenessOk = false;
-        }
-
-        if (wordLikenessOk) {
-          this.possibleAnswers.push(word);
-        }
+        tmpPossibleAnswerLettersWords.words.push(word);
+        this.possibleAnswerLettersWords[tmpIndexKey] = tmpPossibleAnswerLettersWords;
       }
     }
+    for (var key in this.possibleAnswerLettersWords) {
+      var letterWord = this.possibleAnswerLettersWords[key];
+      for (var word of letterWord.words) {
+        var tmpWordPoint: FallouthackcrackerWordPoints = this.wordsPoints[word.word];
+        if (typeof tmpWordPoint == 'undefined') {
+          tmpWordPoint = {
+            word: word.word,
+            points: 0
+          }
+        }
+        tmpWordPoint.points += letterWord.words.length;
+        this.wordsPoints[word.word] = tmpWordPoint;
+      }
+    }
+    var tmpWordsPoints: FallouthackcrackerWordPoints[] = [];
+    for (var key in this.wordsPoints) {
+      tmpWordsPoints.push(this.wordsPoints[key]);
+    }
+    tmpWordsPoints.sort((n1:FallouthackcrackerWordPoints, n2:FallouthackcrackerWordPoints) => {
+      if (n1.points > n2.points) {
+        return -1;
+      }
+      if (n1.points < n2.points) {
+        return 1;
+      }
+
+      return 0;
+    });
+    this.wordsPoints = tmpWordsPoints.slice(0, 4);
   };
 
   constructor() { }

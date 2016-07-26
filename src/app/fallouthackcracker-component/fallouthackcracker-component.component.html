@@ -5,16 +5,23 @@
 	    	<textarea [(ngModel)]="words" (change)="onChange(words)" class="mdl-textfield__input"></textarea>
 	    	<label class="mdl-textfield__label" for="sample5">Text lines...</label>
 		</div>
-		<ul class="words">
-		  <li *ngFor="let word of wordsArr">
-		    {{word.word}} - <input [(ngModel)]="word.likeness" name="likeness" (change)="onLikenessUpdate()" />
-		  </li>
-		</ul>
-		<h2>Possible Answer(s)</h2>
-		<ul class="possibleAnswers">
-		  <li *ngFor="let word of possibleAnswers">
-		    {{word.word}}
-		  </li>
-		</ul>
+		<div>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onGetAnswer()">
+			  Get Answer
+			</button>
+		</div>
+		<div>
+			<h2>Possible Answer(s)</h2>
+			<ul class="possibleAnswers">
+			  <li *ngFor="let word of wordsPoints; let i = index">
+			  	<strong *ngIf="i==0">
+				    {{word.word}} - {{word.points}} points
+				</strong>
+				<span *ngIf="i>0">
+					{{word.word}} - {{word.points}} points
+				</span>
+			  </li>
+			</ul>
+		</div>
 	</div>
 </div>
