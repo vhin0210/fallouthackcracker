@@ -48,6 +48,7 @@ export class FallouthackcrackerComponentComponent implements OnInit {
   };
   onGetAnswer() {
     this.possibleAnswerLettersWords = [];
+    this.wordsPoints = [];
     for (var word of this.wordsArr) {
       for (var i = 0, len = word.word.length; i < len; i++) {
         var tmpChar = word.word[i];
