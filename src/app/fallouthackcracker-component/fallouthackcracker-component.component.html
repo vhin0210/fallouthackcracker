@@ -7,7 +7,7 @@
 		</div>
 		<div>
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onGetAnswer()">
-			  Get Answer
+			  Start
 			</button>
 		</div>
 		<div>
@@ -20,8 +20,14 @@
 				<span *ngIf="i>0">
 					{{word.word}} - {{word.points}} points
 				</span>
+				<input [(ngModel)]="word.likeness" name="likeness" />
 			  </li>
 			</ul>
+		</div>
+		<div>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onCheckLikeness()">
+			  Refresh
+			</button>
 		</div>
 	</div>
 </div>
