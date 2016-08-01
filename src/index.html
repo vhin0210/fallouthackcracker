@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Fallouthackcracker</title>
+  <title>Fallout Hack Cracker</title>
   <base href="/">
 
   {{#unless environment.production}}
@@ -15,6 +15,17 @@
   <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 </head>
 <body>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-29452692-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
   <app-root>Loading...</app-root>
 
     {{#each scripts.polyfills}}

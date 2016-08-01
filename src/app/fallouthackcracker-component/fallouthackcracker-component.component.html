@@ -12,22 +12,42 @@
 		</div>
 		<div>
 			<h2>Possible Answer(s)</h2>
-			<ul class="possibleAnswers">
-			  <li *ngFor="let word of wordsPoints; let i = index">
-			  	<strong *ngIf="i==0">
-				    {{word.word}} - {{word.points}} points
-				</strong>
-				<span *ngIf="i>0">
-					{{word.word}} - {{word.points}} points
-				</span>
-				<input [(ngModel)]="word.likeness" name="likeness" />
-			  </li>
-			</ul>
-		</div>
-		<div>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onCheckLikeness()">
-			  Refresh
-			</button>
+			<div>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onCheckLikeness()">
+				  Refresh
+				</button>
+			</div>
+			<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+				 <thead>
+				    <tr>
+				      <th>Word</th>
+				      <th>Points</th>
+				      <th>Likeness</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let word of wordsPoints; let i = index">
+						<td>
+							<em *ngIf="i==0">{{word.word}}</em>
+							<span *ngIf="i>0">
+								{{word.word}}
+							</span>
+						</td>
+						<td>
+							<em *ngIf="i==0">{{word.points}}</em>
+							<span *ngIf="i>0">
+								{{word.points}}
+							</span>
+						</td>
+						<td>
+							<div class="mdl-textfield mdl-js-textfield">
+								<input [(ngModel)]="word.likeness" name="likeness" class="mdl-textfield__input" />
+								<span class="mdl-textfield__error">Input is not a number!</span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
