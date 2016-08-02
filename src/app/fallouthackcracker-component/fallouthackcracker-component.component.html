@@ -1,53 +1,65 @@
-<div class="mdl-grid">
-	<div class="mdl-cell mdl-cell--12-col">
-		<h2>Enter Clues</h2>
-		<div class="mdl-textfield mdl-js-textfield">
-	    	<textarea [(ngModel)]="words" (change)="onChange(words)" class="mdl-textfield__input"></textarea>
-	    	<label class="mdl-textfield__label" for="sample5">Text lines...</label>
-		</div>
-		<div>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onGetAnswer()">
-			  Start
-			</button>
-		</div>
-		<div>
-			<h2>Possible Answer(s)</h2>
-			<div>
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onCheckLikeness()">
-				  Refresh
-				</button>
+<div class="form-grid-container mdl-grid">
+	<div class="mdl-cell mdl-cell--7-col mdl-cell--12-col-tablet">
+		<div class="app-description-container">
+			<h1 class="mdl-typography--display-4">Fallout Hack Cracker</h1>
+			<div class="app-description-paras">
+				<p class="mdl-typography--title">This is a simple helper to make fallout hacking easier and faster to solve. This doesn't guarantee that it will provide you correct and accurate password everytime.</p>
+				<p class="mdl-typography--title">I made this because I really like playing Fallout and I wanted to learn Angular 2 so I decided to make an app so I can learn and play at the same time 😎</p>
 			</div>
-			<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-				 <thead>
-				    <tr>
-				      <th>Word</th>
-				      <th>Points</th>
-				      <th>Likeness</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let word of wordsPoints; let i = index">
-						<td>
-							<em *ngIf="i==0">{{word.word}}</em>
-							<span *ngIf="i>0">
-								{{word.word}}
-							</span>
-						</td>
-						<td>
-							<em *ngIf="i==0">{{word.points}}</em>
-							<span *ngIf="i>0">
-								{{word.points}}
-							</span>
-						</td>
-						<td>
-							<div class="mdl-textfield mdl-js-textfield">
-								<input [(ngModel)]="word.likeness" name="likeness" class="mdl-textfield__input" />
-								<span class="mdl-textfield__error">Input is not a number!</span>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		</div>
+
+		<div class="form-container mdl-card mdl-shadow--2dp">
+			<div class="mdl-card__actions">
+				<h2 class="mdl-card__title-text">Enter Passwords</h2>
+				<div class="mdl-textfield mdl-js-textfield">
+			    	<textarea [(ngModel)]="words" (change)="onChange(words)" class="mdl-textfield__input"></textarea>
+			    	<label class="mdl-textfield__label" for="sample5">Passwords... One password per line...</label>
+				</div>
+				<div>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onGetAnswer()">
+					  Start
+					</button>
+				</div>
+				<div class="possible-answers-container" *ngIf="wordsPoints.length > 0">
+					<h2 class="mdl-card__title-text">Possible Answer(s)</h2>
+					<div>
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="onCheckLikeness()">
+						  Recalculate
+						</button>
+					</div>
+					<table class="possible-answers-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+						 <thead>
+						    <tr>
+						      <th>Word</th>
+						      <th>Points</th>
+						      <th>Likeness</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let word of wordsPoints; let i = index">
+								<td>
+									<em *ngIf="i==0">{{word.word}}</em>
+									<span *ngIf="i>0">
+										{{word.word}}
+									</span>
+								</td>
+								<td>
+									<em *ngIf="i==0">{{word.points}}</em>
+									<span *ngIf="i>0">
+										{{word.points}}
+									</span>
+								</td>
+								<td>
+									<div class="mdl-textfield mdl-js-textfield">
+										<input [(ngModel)]="word.likeness" name="likeness" class="mdl-textfield__input" />
+										<span class="mdl-textfield__error">Input is not a number!</span>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
