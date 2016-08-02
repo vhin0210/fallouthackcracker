@@ -1,0 +1,16 @@
+.form-container {
+	width: 100%;
+}
+.form-container .mdl-textfield {
+	width: 100%;
+}
+.form-container .mdl-textfield textarea {
+	min-height: 300px;
+}
+.form-container .possible-answers-container {
+	margin-top: 2em;
+}
+.form-container .possible-answers-container .possible-answers-table {
+	margin-top: 1em;
+	width: 100%;
+}

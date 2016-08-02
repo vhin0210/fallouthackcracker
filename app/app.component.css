@@ -1,0 +1,12 @@
+.main-container {
+	background-image: url(app/images/pipboy.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-color: #F1F8E9;
+	color: #333;
+}
+.page-content {
+	background: transparent;
+	background: rgba(255, 255, 255, 0.69);
+}
